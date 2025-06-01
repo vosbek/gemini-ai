@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Prompts - AI Agentic IDE Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="shared-header-placeholder"></div>
+        
+        <main class="main-content-area">
+            <section class="page-section">
+                <h2>Agentic Prompt Templates (2025)</h2>
+                <p>Structured prompt patterns designed for modern agentic AI systems. These templates follow current best practices from tools like Cursor, Cline, and Bolt.new.</p>
+                
+                <h3>🧠 Core Agentic Patterns</h3>
+                
+                <div class="template-card">
+                    <h4>Planning Mode Prompt (Multi-Step Tasks)</h4>
+                    <div class="code-block"># PLANNING MODE
+
+I need you to help implement [FEATURE/TASK DESCRIPTION].
+
+## CONTEXT
+- Current codebase: [Brief description]
+- Technology stack: [List key technologies]
+- Key constraints: [Any limitations or requirements]
+
+## REQUIREMENTS
+[Detailed requirements with user stories if applicable]
+
+## INSTRUCTION
+Please switch to PLANNING MODE and provide:
+
+1. **ANALYSIS**: What you understand about the current state and requirements
+2. **IMPLEMENTATION PLAN**: Break this into phases with specific steps
+3. **DEPENDENCIES**: Files, libraries, or resources needed
+4. **RISK ASSESSMENT**: Potential issues and how to mitigate them
+5. **SUCCESS CRITERIA**: How we'll know it's complete
+
+After I approve the plan, switch to EXECUTION MODE and implement phase by phase.
+
+**Reference Files**: @[list relevant files for context]</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Role-Based Expert Prompt</h4>
+                    <div class="code-block"># EXPERT ROLE ASSIGNMENT
+
+You are a [SPECIFIC ROLE] with 10+ years of experience in [DOMAIN]. You have deep expertise in [SPECIFIC TECHNOLOGIES/PATTERNS].
+
+## YOUR EXPERTISE
+- [Key area 1]: [Specific knowledge]
+- [Key area 2]: [Specific knowledge] 
+- [Key area 3]: [Specific knowledge]
+
+## CURRENT TASK
+[Specific task description]
+
+## CONTEXT FILES
+@[file1.ts] - [Brief description of relevance]
+@[file2.ts] - [Brief description of relevance]
+
+## INSTRUCTIONS
+1. **ANALYZE** the current implementation patterns in the context files
+2. **IDENTIFY** the best approach based on your expertise
+3. **IMPLEMENT** following established patterns and best practices
+4. **EXPLAIN** your reasoning and any trade-offs made
+5. **SUGGEST** any improvements to existing patterns
+
+## CONSTRAINTS
+- Follow patterns established in @[pattern-file]
+- Maintain backward compatibility
+- [Any other specific constraints]
+
+## OUTPUT FORMAT
+Provide complete, working code with explanatory comments where needed.</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Chain-of-Thought Analysis Prompt</h4>
+                    <div class="code-block"># SYSTEMATIC ANALYSIS REQUEST
+
+## PROBLEM STATEMENT
+[Describe the issue or challenge in detail]
+
+## ANALYSIS FRAMEWORK
+Please analyze this systematically using the following steps:
+
+### Step 1: Context Understanding
+- Review the provided files: @[file1], @[file2], @[file3]
+- Identify the current architecture and patterns
+- Understand the data flow and dependencies
+
+### Step 2: Root Cause Analysis
+- What is the underlying issue?
+- What are the contributing factors?
+- How does this relate to the broader system?
+
+### Step 3: Solution Evaluation
+- What are 2-3 potential approaches?
+- What are the pros/cons of each approach?
+- Which approach best fits our existing patterns?
+
+### Step 4: Implementation Plan
+- What specific changes are needed?
+- What files need to be modified?
+- What testing is required?
+
+### Step 5: Risk Assessment
+- What could go wrong with this approach?
+- How can we mitigate these risks?
+- What should we monitor after implementation?
+
+## DELIVERABLE
+Provide a clear recommendation with implementation code and reasoning.</div>
+                </div>
+                
+                <h3>🔧 Development Workflow Prompts</h3>
+                
+                <div class="template-card">
+                    <h4>Feature Development Workflow</h4>
+                    <div class="code-block"># FEATURE DEVELOPMENT WORKFLOW
+
+## FEATURE SPECIFICATION
+**Feature Name**: [Name]
+**User Story**: As a [user type], I want to [action] so that [benefit]
+**Acceptance Criteria**:
+- [ ] [Specific testable criterion 1]
+- [ ] [Specific testable criterion 2]
+- [ ] [Specific testable criterion 3]
+
+## DEVELOPMENT PHASES
+
+### Phase 1: Architecture & Planning
+1. Analyze existing patterns in @[relevant-files]
+2. Design data models and API contracts
+3. Plan component hierarchy and state management
+4. Identify integration points and dependencies
+
+### Phase 2: Backend Implementation
+1. Implement data models following @[model-pattern]
+2. Create API endpoints following @[api-pattern]
+3. Add validation and error handling
+4. Write comprehensive tests
+
+### Phase 3: Frontend Implementation
+1. Create components following @[component-pattern]
+2. Implement state management and API integration
+3. Add loading states and error handling
+4. Ensure responsive design and accessibility
+
+### Phase 4: Integration & Testing
+1. End-to-end testing of the complete workflow
+2. Performance testing and optimization
+3. Security review and validation
+4. Documentation updates
+
+## CONSTRAINTS
+- Follow established patterns in @[pattern-files]
+- Maintain test coverage above 90%
+- Ensure backward compatibility
+- [Other project-specific constraints]
+
+## SUCCESS METRICS
+- All acceptance criteria met
+- Tests passing with appropriate coverage
+- Performance benchmarks met
+- Code review approved
+
+Please start with Phase 1 and proceed step by step, asking for approval before moving to the next phase.</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Advanced Debugging Workflow</h4>
+                    <div class="code-block"># SYSTEMATIC DEBUGGING WORKFLOW
+
+## ISSUE DESCRIPTION
+**Problem**: [Concise description of the issue]
+**Environment**: [Browser, Node version, OS, etc.]
+**Reproduction Steps**:
+1. [Step 1]
+2. [Step 2]
+3. [Step 3] - Issue occurs here
+
+**Expected Behavior**: [What should happen]
+**Actual Behavior**: [What actually happens]
+
+## ERROR INFORMATION
+```
+[Paste exact error messages, stack traces, console output]
+```
+
+## CONTEXT FILES
+@[file1.ts] - [Relevance to the issue]
+@[file2.ts] - [Relevance to the issue]
+@[file3.ts] - [Relevance to the issue]
+
+## DEBUGGING INSTRUCTIONS
+
+### Phase 1: Analysis
+1. **Trace Execution Path**: Follow the code path that leads to the error
+2. **Identify Variables**: What data is being processed when the error occurs?
+3. **Check Assumptions**: What assumptions might be incorrect?
+4. **Review Recent Changes**: What changed recently that might cause this?
+
+### Phase 2: Hypothesis Formation
+Based on your analysis, form 2-3 hypotheses about the root cause:
+1. **Hypothesis 1**: [Description and reasoning]
+2. **Hypothesis 2**: [Description and reasoning]
+3. **Hypothesis 3**: [Description and reasoning]
+
+### Phase 3: Investigation
+For each hypothesis, suggest specific debugging steps:
+- What logs to add?
+- What values to inspect?
+- What test cases to run?
+
+### Phase 4: Solution
+Once the root cause is identified:
+1. **Fix**: Implement the solution
+2. **Test**: Verify the fix works
+3. **Prevent**: Add tests or checks to prevent regression
+4. **Document**: Update documentation if needed
+
+## CONSTRAINTS
+- Maintain existing API contracts
+- Don't break other functionality
+- Follow established patterns in @[pattern-files]
+- Add appropriate error handling
+
+## DELIVERABLE
+Provide:
+1. Root cause analysis
+2. Complete fix with explanation
+3. Test cases to prevent regression
+4. Any related improvements</div>
+                </div>
+                
+                <h3>🧪 Testing & Quality Assurance</h3>
+                
+                <div class="template-card">
+                    <h4>Comprehensive Testing Strategy</h4>
+                    <div class="code-block"># TESTING STRATEGY PROMPT
+
+## TARGET CODE
+@[file-to-test.ts] - [Description of functionality]
+
+## TESTING REQUIREMENTS
+
+### Test Categories Needed
+- [ ] **Unit Tests**: Test individual functions/methods
+- [ ] **Integration Tests**: Test component interactions
+- [ ] **E2E Tests**: Test complete user workflows
+- [ ] **Performance Tests**: Test under load
+- [ ] **Security Tests**: Test for vulnerabilities
+
+## TESTING INSTRUCTIONS
+
+### 1. Analyze the Code
+- **Public Interface**: What methods/functions are exposed?
+- **Dependencies**: What external services/modules are used?
+- **Edge Cases**: What unusual inputs or conditions might occur?
+- **Error Conditions**: What can go wrong?
+
+### 2. Design Test Strategy
+- **Happy Path Tests**: Normal operation with valid inputs
+- **Edge Case Tests**: Boundary conditions and unusual inputs
+- **Error Path Tests**: Invalid inputs and error conditions
+- **Integration Tests**: How it works with other components
+
+### 3. Implement Tests
+Follow the patterns established in @[test-pattern-file]:
+
+```typescript
+// Example structure
+describe('[ComponentName]', () => {
+  describe('[methodName]', () => {
+    it('should [expected behavior] when [condition]', async () => {
+      // Arrange
+      // Act  
+      // Assert
+    });
+  });
+});
+```
+
+### 4. Test Data Management
+- Use factories for creating test data
+- Mock external dependencies appropriately
+- Clean up after each test
+
+### 5. Coverage Goals
+- **Statements**: 95%+
+- **Branches**: 90%+
+- **Functions**: 100%
+- **Lines**: 95%+
+
+## SPECIFIC TEST SCENARIOS
+[List any specific scenarios that must be tested based on the functionality]
+
+## CONSTRAINTS
+- Follow testing patterns in @[test-patterns]
+- Use existing test utilities and mocks
+- Tests should run fast (< 100ms each for unit tests)
+- Tests should be deterministic and reliable
+
+## DELIVERABLE
+Provide complete test suite with:
+1. Comprehensive test coverage
+2. Clear, descriptive test names
+3. Proper setup/teardown
+4. Mock implementations where needed
+5. Performance assertions where relevant</div>
+                </div>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>🔧 Tool Setup</h4>
+                        <p>Configure your development environment to use these prompt patterns effectively with modern AI tools.</p>
+                        <a href="tool-setup.html" class="btn">Setup Tools →</a>
+                    </div>
+                    <div class="card">
+                        <h4>📺 Cursor Resources</h4>
+                        <p>See these prompt patterns in action with Cursor's advanced features and capabilities.</p>
+                        <a href="cursor-resources.html" class="btn">Watch Videos →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

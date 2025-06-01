@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Setup - AI Agentic IDE Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="shared-header-placeholder"></div>
+        
+        <main class="main-content-area">
+            <section class="page-section">
+                <h2>Modern Tool Setup & Configuration (2025)</h2>
+                <p>Current generation agentic IDE setup with the latest tools and configurations.</p>
+                
+                <h3>Model Selection Guide</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="success">Claude 4 Sonnet</span></h4>
+                        <p><strong>Best for:</strong> Architecture decisions, complex reasoning, code review</p>
+                        <p><strong>Use when:</strong> Planning features, debugging complex issues</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="success">Gemini 2.5 Pro</span></h4>
+                        <p><strong>Best for:</strong> Fast implementation, large context windows</p>
+                        <p><strong>Use when:</strong> Implementing planned features, refactoring</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="success">GPT-4o</span></h4>
+                        <p><strong>Best for:</strong> General coding, quick iterations</p>
+                        <p><strong>Use when:</strong> Standard development tasks</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="success">o3</span></h4>
+                        <p><strong>Best for:</strong> Complex algorithms, optimization</p>
+                        <p><strong>Use when:</strong> Solving difficult technical challenges</p>
+                    </div>
+                </div>
+                
+                <h3>Workspace Organization</h3>
+                <div class="code-block">recommended-workspace/
+├── .cursor/
+│   ├── rules/
+│   │   ├── frontend.md  &lt;!-- Note: Original had .md, should be .mdc for Cursor --&gt;
+│   │   ├── backend.md   &lt;!-- Note: Original had .md, should be .mdc for Cursor --&gt;
+│   │   └── testing.md   &lt;!-- Note: Original had .md, should be .mdc for Cursor --&gt;
+│   └── mcp-config.json
+├── .cursorrules         &lt;!-- Legacy, prefer .mdc files in .cursor/rules/ --&gt;
+├── frontend/
+│   ├── src/
+│   └── package.json
+├── backend/
+│   ├── src/
+│   └── package.json
+├── shared/
+│   └── types/
+└── docs/
+    ├── api-spec.md
+    └── architecture.md</div>
+                <p><small><strong>Note:</strong> For modern Cursor, <code>.mdc</code> files inside <code>.cursor/rules/</code> are preferred over a root <code>.cursorrules</code> file. The <code>.md</code> extensions in the example above should ideally be <code>.mdc</code> if they are intended as Cursor rule files.</small></p>
+
+                <h3>Essential Configuration Files</h3>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>🏗️ Basic .cursorrules (Legacy)</h4>
+                        <p><small>This is a simpler, older format. Prefer <code>.mdc</code> files for more features.</small></p>
+                        <div class="code-block"># You are an expert developer assistant
+
+## Core Principles
+- Always provide complete, working code
+- Use existing patterns from the codebase
+- Ask clarifying questions when needed
+- Explain complex decisions
+
+## Code Quality
+- Follow TypeScript best practices
+- Include proper error handling
+- Write meaningful tests
+- Optimize for readability</div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>⚙️ Advanced .mdc Rules (Recommended)</h4>
+                        <p><small>Example: <code>.cursor/rules/foundation.mdc</code></small></p>
+                        <div class="code-block">---
+description: Advanced development patterns
+globs: ["src/**/*.ts", "src/**/*.tsx"]
+alwaysApply: true # Or false if it's technology-specific
+---
+
+# Expert Developer Assistant
+
+## Context Awareness
+- Analyze existing code patterns
+- Maintain consistency across files
+- Use @filename syntax for references
+
+## Implementation Standards
+- Follow established architecture
+- Use proper TypeScript types
+- Implement comprehensive testing</div>
+                    </div>
+                </div>
+                
+                <h3>Recommended Extensions & Tools</h3>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>🔧 Essential VS Code Extensions</h4>
+                        <ul style="margin-top: 10px; list-style-position: inside; padding-left: 5px;">
+                            <li>GitHub Copilot (or Cursor which has similar AI features)</li>
+                            <li>TypeScript Hero (or built-in TS features)</li>
+                            <li>Prettier - Code formatter</li>
+                            <li>ESLint</li>
+                            <li>GitLens</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🎯 Cursor IDE Features</h4>
+                        <ul style="margin-top: 10px; list-style-position: inside; padding-left: 5px;">
+                            <li>Intelligent context awareness</li>
+                            <li>Custom rule files (.mdc format)</li>
+                            <li>Multi-model support</li>
+                            <li>Documentation indexing (@-file referencing)</li>
+                            <li>Command-line integration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🧪 Testing Setup</h4>
+                        <ul style="margin-top: 10px; list-style-position: inside; padding-left: 5px;">
+                            <li>Jest for unit testing</li>
+                            <li>Playwright for E2E testing</li>
+                            <li>React Testing Library (for React projects)</li>
+                            <li>Storybook for component development/testing</li>
+                            <li>Coverage reporting tools</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🚀 Development Workflow</h4>
+                        <ul style="margin-top: 10px; list-style-position: inside; padding-left: 5px;">
+                            <li>Husky for git hooks</li>
+                            <li>Lint-staged for pre-commit checks</li>
+                            <li>Conventional Commits (commitizen)</li>
+                            <li>Semantic Versioning</li>
+                            <li>CI/CD pipeline integration (e.g., GitHub Actions)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Quick Setup Commands (Example)</h3>
+                
+                <div class="code-block"># Initialize new project with AI-friendly structure
+mkdir my-ai-project && cd my-ai-project
+
+# Create essential directories
+mkdir -p .cursor/rules src tests docs
+
+# Initialize package.json (for Node.js projects)
+npm init -y
+
+# Install essential dependencies (example for a TypeScript project)
+npm install typescript @types/node --save-dev 
+# Note: Original had 'npm install typescript @types/node' (implies global or wrong save type)
+# For linters, formatters, test runners:
+npm install prettier eslint jest @types/jest ts-jest --save-dev
+
+# Create basic .cursor/rules/foundation.mdc (example)
+echo "---
+description: Core development standards
+globs: [\"**/*\"]
+alwaysApply: true
+---
+
+# You are an expert developer assistant
+- Always provide complete, working code.
+- Reference existing patterns using @filename.ext.
+" > .cursor/rules/foundation.mdc
+
+# Setup git
+git init
+echo "node_modules/" > .gitignore
+echo ".DS_Store" >> .gitignore
+git add .
+git commit -m "Initial commit with AI-friendly structure and basic Cursor rule"</div>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>📺 Watch Setup in Action</h4>
+                        <p>See how to configure Cursor IDE and related tools with practical examples and demonstrations.</p>
+                        <a href="cursor-resources.html" class="btn">View Resources →</a>
+                    </div>
+                    <div class="card">
+                        <h4>📋 Get Rule Templates</h4>
+                        <p>Download ready-to-use rule files and configuration templates for your project setup.</p>
+                        <a href="rule-files.html" class="btn">Download Rules →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow - AI Agentic IDE Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="shared-header-placeholder"></div>
+        
+        <main class="main-content-area">
+            <section class="page-section">
+                <h2>Real-World AI Workflows for Large Codebases</h2>
+                <p>Based on proven practices from developers working with production codebases. Modern agentic IDEs like Cursor handle context automatically - your job is to provide the right documentation and guidance.</p>
+                
+                <h3>🏗️ Foundation Setup (Do This Once)</h3>
+                
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Document Your Codebase Patterns</h4>
+                        <div class="code-block"><strong>Create Documentation Files (Most Important Step):</strong>
+
+📁 <strong>backend-patterns.md</strong> - Explain your backend structure
+"Our API endpoints follow this pattern:
+- Routes go in /routes/[resource].js
+- Services handle business logic in /services/[resource]Service.js  
+- Database queries use our custom ORM wrapper in /data/[resource]Repository.js
+- Error handling: always use our ApiError class with consistent status codes"
+
+📁 <strong>frontend-patterns.md</strong> - Document your UI patterns
+"React components follow this structure:
+- Use functional components with hooks
+- State management with Zustand (not Context API)
+- Forms use react-hook-form + zod validation
+- Styling with Tailwind following our design system
+- Error boundaries wrap all page-level components"
+
+📁 <strong>database-patterns.md</strong> - Database conventions
+📁 <strong>testing-patterns.md</strong> - Testing approach
+📁 <strong>deployment-patterns.md</strong> - DevOps patterns
+
+<strong>Why This Works:</strong> AI reads these files automatically and follows your patterns without you explaining every time.</div>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Create Smart .cursorrules File</h4>
+                        <div class="code-block"><strong>Essential .cursorrules (Copy This):</strong>
+
+# Core Behavior
+- Only modify code directly relevant to the specific request
+- Never replace code with placeholders - always include complete code
+- Break problems into smaller steps before implementing
+- Always provide a complete PLAN with REASONING before making changes
+- Don't change code randomly, ask if you're not sure
+
+# Project Standards
+- Follow patterns in [your-backend-patterns.md]
+- Use existing components as examples, don't reinvent
+- Reference similar existing files when creating new ones
+- Maintain backwards compatibility unless explicitly told otherwise
+
+# Quality Requirements
+- Write comprehensive error handling
+- Include proper TypeScript types
+- Add meaningful tests for new functionality
+- Follow our established naming conventions
+
+<strong>Pro Tip:</strong> Reference your pattern files in the rules so AI always checks them.</div>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Set Up Workspace for Context Awareness</h4>
+                        <div class="code-block"><strong>Modern IDE Setup:</strong>
+
+✅ <strong>Let Cursor index everything</strong> - Don't manually manage files
+✅ <strong>Use @-references</strong> - Type @filename to include specific files
+✅ <strong>Keep workspace organized</strong> - AI works better with clean structure
+✅ <strong>Use meaningful folder names</strong> - AI understands purpose from structure
+✅ <strong>Regular reindexing</strong> - Hit reindex button in Cursor settings periodically
+
+❌ <strong>Don't:</strong> Micromanage which files are "open"
+❌ <strong>Don't:</strong> Close files to "help" the AI
+❌ <strong>Don't:</strong> Open entire codebase in one workspace
+
+<strong>Key Insight:</strong> Modern AI has context awareness - provide structure, not manual file management.</div>
+                    </div>
+                </div>
+                
+                <h3>🎯 Daily Development Workflows</h3>
+                
+                <div class="template-card">
+                    <h4>Workflow 1: Adding New Feature</h4>
+                    <div class="code-block"><strong>Step 1: Plan First (Co-write with AI)</strong>
+"I need to add user roles functionality. Let's plan this:
+- What models/tables need changes?
+- Which API endpoints are required?
+- What UI components need updates?
+- How does this integrate with existing auth?
+
+Create a detailed implementation plan with file list and dependencies."
+
+<strong>Step 2: Point to Existing Patterns</strong>
+"Look at how user permissions are handled in @UserService.js and @PermissionMiddleware.js. 
+Create the roles system following the same patterns for:
+- Database structure
+- API design
+- Middleware implementation
+- Error handling"
+
+<strong>Step 3: Implement One File at a Time</strong>
+"Start with the Role model in @models/Role.js. 
+Follow the same structure as @models/User.js."
+
+<strong>Step 4: Test Integration</strong>
+"Now update @UserService.js to include role checking.
+Make sure it integrates properly with existing authentication."
+
+<strong>Success Pattern:</strong> Plan → Pattern Reference → Small Steps → Integration Check</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Workflow 2: Debugging Complex Issues</h4>
+                    <div class="code-block"><strong>Step 1: Provide Complete Context</strong>
+"I'm getting [exact error message] when users try to [specific action].
+
+Error occurs in: @ComponentName.tsx
+Related files: @ServiceName.js, @types/User.ts
+Reproduction: [exact steps]
+Browser console: [paste relevant logs]"
+
+<strong>Step 2: Ask for Analysis First</strong>
+"Before suggesting fixes, analyze this error:
+1. What's the likely root cause?
+2. What files are involved in this flow?
+3. What should we check first?
+4. Are there any related issues to watch for?"
+
+<strong>Step 3: Get Targeted Fix</strong>
+"Based on your analysis, provide a specific fix for [the identified issue].
+Maintain the existing patterns in @RelatedFile.js.
+Explain why this fix addresses the root cause."
+
+<strong>Step 4: Prevent Regression</strong>
+"What tests should we add to prevent this issue from happening again?
+Create the tests following patterns in @existing.test.js"
+
+<strong>Key Insight:</strong> AI is excellent at analysis when given complete context.</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Workflow 3: Understanding Legacy Code</h4>
+                    <div class="code-block"><strong>Step 1: High-Level Overview</strong>
+"Analyze @LegacyComponent.tsx and explain:
+1. What is this component's main responsibility?
+2. How does it fit into the overall application flow?
+3. What are its key dependencies and integrations?
+4. What patterns does it follow that I should maintain?"
+
+<strong>Step 2: Specific Function Analysis</strong>
+"Focus on the @handleComplexOperation method:
+- What does it do step by step?
+- What business rules does it implement?
+- What are the potential failure points?
+- How should I safely modify it?"
+
+<strong>Step 3: Modification Strategy</strong>
+"I need to add [specific change]. Based on the existing code:
+1. What's the safest approach?
+2. Which files need updates?
+3. What existing patterns should I follow?
+4. What could break and how to prevent it?"
+
+<strong>Pro Tip:</strong> Use AI to understand before modifying - it's excellent at code analysis.</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Workflow 4: Test-Driven Development</h4>
+                    <div class="code-block"><strong>Step 1: Generate Comprehensive Tests</strong>
+"Looking at @ExistingService.test.js patterns, create tests for the new UserRoleService:
+
+- Unit tests for all public methods
+- Integration tests with database
+- Error handling for edge cases
+- Performance tests for bulk operations
+
+Follow our testing conventions and use the same mocking patterns."
+
+<strong>Step 2: Implement to Pass Tests</strong>
+"I have these failing tests: [paste test file]
+
+Implement UserRoleService to make all tests pass.
+Follow the patterns in @UserService.js for:
+- Error handling
+- Database operations
+- Validation logic"
+
+<strong>Step 3: Iterate on Edge Cases</strong>
+"The tests are passing but let's add coverage for:
+- What happens with invalid role hierarchies?
+- How do we handle concurrent role changes?
+- What about users with multiple roles?
+
+Add tests and update implementation."
+
+<strong>Success Pattern:</strong> Test First → Implement → Iterate → Verify</div>
+                </div>
+                
+                <h3>⚙️ Advanced Workflow Patterns</h3>
+                
+                <div class="template-card">
+                    <h4>Cross-File Coordination (Full-Stack Changes)</h4>
+                    <div class="code-block"><strong>For Complex Changes Spanning Multiple Files:</strong>
+
+"I'm adding 'priority' field to Tasks. Update these files maintaining consistency:
+
+1. **Database**: @models/Task.js + migration script
+2. **Backend**: @routes/tasks.js API endpoints  
+3. **Types**: @types/Task.ts TypeScript definitions
+4. **Frontend**: @components/TaskCard.tsx UI updates
+5. **Tests**: Update relevant test files
+
+Follow our established patterns for:
+- Database field additions (see @models/User.js recent changes)
+- API versioning (maintain backwards compatibility)
+- Type safety (ensure proper propagation)
+- UI updates (follow design system)"
+
+<strong>Key:</strong> AI can coordinate complex changes when given clear structure and references.</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>Code Review and Optimization</h4>
+                    <div class="code-block"><strong>Multi-Angle Review Process:</strong>
+
+"Review this @NewFeature.js for production readiness:
+
+**Security Review:**
+- Input validation and sanitization
+- Authentication/authorization checks
+- Potential security vulnerabilities
+
+**Performance Review:**
+- Database query efficiency
+- Memory usage patterns
+- Potential bottlenecks
+
+**Code Quality Review:**
+- Follows our established patterns in @backend-patterns.md
+- Error handling completeness
+- Testing coverage gaps
+
+**Integration Review:**
+- Compatibility with existing systems
+- Breaking change assessment
+- Documentation needs
+
+Provide specific recommendations with code examples."
+
+<strong>Pro Tip:</strong> AI excels at systematic reviews when given clear criteria.</div>
+                </div>
+                
+                <h3>🚨 Critical Success Factors</h3>
+                
+                <div class="principle">
+                    <h4>Always Do This</h4>
+                    <div class="code-block">✅ **Document your patterns** - Create pattern files that AI can reference
+✅ **Plan before coding** - Co-write implementation plans with AI first
+✅ **Use existing examples** - Point to similar code rather than explaining
+✅ **Control scope** - One function/file at a time for complex changes
+✅ **Test AI output** - Always verify code actually works
+✅ **Ask for reasoning** - "Explain why you did it this way"
+✅ **Maintain rule files** - Update .cursorrules based on what you learn</div>
+                </div>
+                
+                <div class="principle">
+                    <h4>Never Do This</h4>
+                    <div class="code-block">❌ **Don't expect AI to "figure it out"** - Provide clear direction
+❌ **Don't skip planning** - Jumping straight to code causes problems
+❌ **Don't trust security-critical code** without extra review
+❌ **Don't ignore AI errors** - Fix them one by one, don't copy-paste error walls
+❌ **Don't let codebase get disorganized** - AI needs structure to work well
+❌ **Don't forget to reindex** - Cursor needs fresh context regularly</div>
+                </div>
+                
+                <h3>📊 What Success Looks Like</h3>
+                <div class="code-block"><strong>You'll know these workflows are working when:</strong>
+
+• **Speed**: 40-60% faster feature development
+• **Quality**: AI suggestions match your patterns consistently  
+• **Confidence**: Less time debugging AI-generated code
+• **Learning**: Better understanding of unfamiliar parts of your codebase
+• **Focus**: More time on architecture, less on boilerplate
+• **Team Consistency**: New developers quickly adopt your patterns
+
+<strong>Key Metric:</strong> You're spending more time reviewing and refining than explaining and correcting.</div>
+                
+                <h3>🎯 Essential Templates & Rules</h3>
+                <p>The documentation-driven approach and smart rule files are what separate effective AI workflows from frustrating ones. Invest time in these foundations and your AI collaboration will transform from "helpful but unpredictable" to "reliable team member."</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>📋 Get Rule Templates</h4>
+                        <p>Ready-to-use .cursorrules and pattern files to implement these workflows in your project.</p>
+                        <a href="rule-files.html" class="btn">Browse Templates →</a>
+                    </div>
+                    <div class="card">
+                        <h4>💬 Advanced Prompts</h4>
+                        <p>Structured prompt patterns that make these workflows even more effective.</p>
+                        <a href="agentic-prompts.html" class="btn">View Prompts →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

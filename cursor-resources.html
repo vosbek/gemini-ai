@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Resources - AI Agentic IDE Guide</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="container">
+        <div id="shared-header-placeholder"></div>
+        
+        <main class="main-content-area">
+            <section class="page-section">
+                <h2>Cursor Resources</h2>
+                <p>Essential Cursor IDE features and capabilities demonstrated through practical examples. These videos show how to maximize your productivity with Cursor's advanced AI-powered development tools.</p>
+                
+                <div class="video-grid">
+                    <div class="video-container">
+                        <h3>📚 Documentation Integration</h3>
+                        <img src="https://placehold.co/600x400/667eea/white?text=Video:Cursor+Docs" alt="Cursor Documentation Indexing Video Placeholder" class="video-placeholder" onerror="this.src='https://placehold.co/600x400/cccccc/333333?text=Video+Not+Available'; this.alt='Video loading error placeholder';">
+                        <div class="video-description">
+                            <h4>Cursor Documentation Indexing</h4>
+                            <p>Learn how Cursor can automatically index and understand any documentation to provide contextually relevant suggestions. This feature allows Cursor to reference your project's docs, API specifications, and external libraries for more accurate code generation.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>Automatic documentation scanning and indexing</li>
+                                <li>Context-aware suggestions based on your docs</li>
+                                <li>Integration with external API documentation</li>
+                                <li>Smart reference linking in code comments (@-file referencing)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <h3>🎛️ Custom Development Modes</h3>
+                         <img src="https://placehold.co/600x400/764ba2/white?text=Video:Custom+Modes" alt="Cursor Custom Modes Video Placeholder" class="video-placeholder" onerror="this.src='https://placehold.co/600x400/cccccc/333333?text=Video+Not+Available'; this.alt='Video loading error placeholder';">
+                        <div class="video-description">
+                            <h4>Cursor Custom Modes</h4>
+                            <p>Discover how to create and use custom modes in Cursor to tailor the AI's behavior for specific development contexts. Custom modes allow you to define specialized AI behaviors for different types of work.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>Creating project-specific AI behavior modes</li>
+                                <li>Context switching for different development phases</li>
+                                <li>Custom prompt templates and workflows</li>
+                                <li>Team-wide mode sharing and standardization</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <h3>⚙️ Automated Rule Generation</h3>
+                        <img src="https://placehold.co/600x400/667eea/white?text=Video:Generate+Rules" alt="Cursor Rule Generation Video Placeholder" class="video-placeholder" onerror="this.src='https://placehold.co/600x400/cccccc/333333?text=Video+Not+Available'; this.alt='Video loading error placeholder';">
+                        <div class="video-description">
+                            <h4>Cursor Rule Generation (from Code)</h4>
+                            <p>See how Cursor can automatically analyze your codebase patterns and generate intelligent rule files (e.g., <code>.mdc</code>). This feature helps maintain consistency across your project by learning from your existing code style and conventions.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>Automatic pattern recognition from existing code</li>
+                                <li>Generation of project-specific rule files</li>
+                                <li>Code style and convention enforcement</li>
+                                <li>Continuous rule refinement based on feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <h3>📊 Mermaid Diagram Generation</h3>
+                        <img src="https://placehold.co/600x400/764ba2/white?text=Video:Mermaid+Diagrams" alt="Cursor Mermaid Integration Video Placeholder" class="video-placeholder" onerror="this.src='https://placehold.co/600x400/cccccc/333333?text=Video+Not+Available'; this.alt='Video loading error placeholder';">
+                        <div class="video-description">
+                            <h4>Cursor Mermaid Integration</h4>
+                            <p>Learn how Cursor can automatically generate Mermaid diagrams from your code structure, helping you visualize system architecture, data flows, and component relationships without manual diagram creation.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>Automatic code-to-diagram generation</li>
+                                <li>Support for flowcharts, sequence diagrams, and entity relationships</li>
+                                <li>Real-time diagram updates as code changes</li>
+                                <li>Integration with documentation workflows</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>🚀 Getting Started with These Features</h3>
+                
+                <div class="template-card">
+                    <h4>Quick Setup Guide</h4>
+                    <div class="code-block"><strong>1. Enable Documentation Indexing (@-references)</strong>
+• In Cursor, ensure your project is open.
+• Use "@" in chat to reference files (e.g., @src/components/Button.tsx).
+• For broader documentation, place .md files in a /docs folder and @-reference them.
+• Cursor Settings → Features → "Auto-include @-refs from open files" can be useful.
+
+<strong>2. Create Custom Modes (or use Model Presets)</strong>
+• Cursor Settings → AI → Model Presets.
+• Define prompts and behaviors for different tasks (e.g., "Code Generation", "Code Review").
+• Assign custom names and optionally keyboard shortcuts.
+
+<strong>3. Generate Rules Automatically (from existing code)</strong>
+• Right-click on a folder or file in Cursor's explorer.
+• Select "Generate Rules from Code..." (or similar wording).
+• Review and save the generated .mdc file in your .cursor/rules/ directory.
+
+<strong>4. Enable Mermaid Generation</strong>
+• Ensure you have the Mermaid extension (often built-in or easily installable in VS Code based IDEs).
+• In Cursor chat, ask to generate a Mermaid diagram based on selected code or a description.
+  Example: "Generate a sequence diagram for the login flow in @authService.ts"
+• Copy the generated Mermaid syntax and use it in .md files or supported viewers.</div>
+                </div>
+                
+                <h3>💡 Best Practices</h3>
+                
+                <div class="principle">
+                    <h4>Documentation Integration Tips</h4>
+                    <p>Keep your documentation up-to-date and well-structured. Cursor works best with markdown files, API specs in OpenAPI format, and clear code comments. Organize docs in a logical hierarchy that mirrors your code structure. Use @-file referencing extensively.</p>
+                </div>
+                
+                <div class="principle">
+                    <h4>Custom Mode Strategies</h4>
+                    <p>Create modes (or Model Presets in Cursor) for different development phases: "Planning" mode for architecture discussions, "Implementation" mode for rapid coding, "Review" mode for code analysis, and "Documentation" mode for writing docs and comments.</p>
+                </div>
+                
+                <div class="principle">
+                    <h4>Rule File Management (.mdc)</h4>
+                    <p>Regularly review and update your generated rules in <code>.cursor/rules/</code>. Start with auto-generated rules as a foundation, then customize them based on team feedback and project evolution. Version control your <code>.cursor</code> directory.</p>
+                </div>
+                
+                <div class="principle">
+                    <h4>Diagram Workflow Integration</h4>
+                    <p>Generate diagrams early in development to validate architecture decisions. Update diagrams when refactoring major components. Use sequence diagrams for API flows and flowcharts for business logic visualization.</p>
+                </div>
+                
+                <hr class="styled">
+                
+                <h2>📖 Official Cursor Documentation & Guides</h2>
+                <p>Comprehensive resources from the Cursor team to help you master every aspect of the IDE. These official guides provide in-depth coverage of features and best practices.</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>🏠 Main Documentation</h4>
+                        <p>The complete Cursor documentation covering all features, setup, and configuration options.</p>
+                        <a href="https://docs.cursor.com/welcome" class="btn">View Docs</a>
+                    </div>
+                    <div class="card">
+                        <h4>📚 Official Guides</h4>
+                        <p>Step-by-step tutorials and guides for mastering Cursor's advanced features and workflows.</p>
+                        <a href="https://docs.cursor.com/guides" class="btn">Browse Guides</a>
+                    </div>
+                    <div class="card">
+                        <h4>⌨️ Keyboard Shortcuts</h4>
+                        <p>Complete reference of keyboard shortcuts to speed up your development workflow in Cursor.</p>
+                        <a href="https://docs.cursor.com/kbd" class="btn">View Shortcuts</a>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Changelog</h4>
+                        <p>Stay updated with the latest Cursor features, improvements, and bug fixes.</p>
+                        <a href="https://www.cursor.com/changelog" class="btn">View Changelog</a> </div>
+                </div>
+                
+                <h2>⚡ Advanced Features & Workflows</h2>
+                <p>Master Cursor's advanced capabilities for enterprise development and complex projects. These guides cover sophisticated workflows for professional development teams.</p>
+                
+                <div class="template-card">
+                    <h4>🏢 Working with Large Codebases</h4>
+                    <p>Essential strategies for using Cursor effectively in enterprise-scale projects with hundreds of thousands of lines of code. Learn how to maintain performance and accuracy when working with massive repositories.</p>
+                    <div class="code-block"><strong>Key Topics Covered:</strong>
+• Optimizing Cursor's indexing for large projects
+• Managing context windows in complex codebases
+• Performance tuning for enterprise environments
+• Best practices for team collaboration on large projects
+• Memory and resource management strategies</div>
+                    <a href="https://docs.cursor.com/guides/advanced/large-codebases" class="btn">Read Large Codebase Guide</a>
+                </div>
+                
+                <div class="template-card">
+                    <h4>🔌 Model Context Protocol (MCP) - Now "Context Providers"</h4>
+                    <p>Learn how to integrate external tools and services with Cursor using Context Providers (formerly MCP). This allows Cursor to work with databases, APIs, and other development tools seamlessly.</p>
+                    <div class="code-block"><strong>Context Provider Capabilities:</strong>
+• Connect to external databases for schema awareness
+• Integrate with REST APIs and GraphQL endpoints
+• Access cloud services and development tools
+• Create custom integrations for your workflow
+• Share context across multiple development environments</div>
+                    <a href="https://docs.cursor.com/guides/working-with-context#context-providers" class="btn">Learn Context Providers</a> </div>
+                
+                <div class="template-card">
+                    <h4>💬 AI-Powered Commit Messages</h4>
+                    <p>Automatically generate meaningful, conventional commit messages based on your code changes. This feature analyzes your diffs and creates professional commit messages that follow best practices.</p>
+                    <div class="code-block"><strong>Features:</strong>
+• Automatic analysis of code changes
+• Conventional commit format generation
+• Context-aware message creation
+• Support for multiple commit message styles
+• Integration with Git workflow</div>
+                    <a href="https://docs.cursor.com/features/ai-commit-messages" class="btn">Setup Auto Commit Messages</a> </div>
+                
+                <h2>🎥 Community Learning Resources</h2>
+                <p>Learn from the community with curated video tutorials, tips, and real-world examples from Cursor users worldwide.</p>
+                
+                <div class="template-card">
+                    <h4>📺 Cursor Directory - Video Collection (Community Resource)</h4>
+                    <p>A comprehensive collection of community-created videos covering various Cursor features, workflows, and use cases. These videos provide practical examples and tips from experienced Cursor users. (Note: cursor.directory is a community site, not official)</p>
+                    <div class="code-block"><strong>Video Categories Include:</strong>
+• Getting started tutorials
+• Advanced workflow demonstrations
+• Integration examples with popular frameworks
+• Tips and tricks from power users
+• Real-world project walkthroughs
+• Troubleshooting common issues</div>
+                    <a href="https://cursor.directory/learn" class="btn">Browse Community Videos</a>
+                </div>
+                
+                <h2>⚠️ Features Under Development</h2>
+                <p><strong>Important:</strong> Some Cursor features are still in development and not recommended for production use without caution.</p>
+                
+                <div class="template-card" style="border-left: 4px solid #f56565; background: #fed7d7;">
+                    <h4>🚫 Background Agents (Experimental) - Use with Caution</h4>
+                    <p><strong class="highlight">⚠️ EXPERIMENTAL - MAY NOT BE SUITABLE FOR ALL PRODUCTION WORK</strong></p>
+                    <p>Background Agents is an experimental feature. While it shows promise for autonomous development tasks, it may have limitations or undergo changes.</p>
+                    <div class="code-block"><strong>Considerations:</strong>
+❓ Experimental stability and reliability
+❓ Potential impact on privacy mode or resource usage
+❓ May interfere with normal development workflow if not configured carefully
+❓ Control over agent actions might be less granular than direct interaction
+
+<strong>Current Status (General for Experimental Features):</strong>
+• May be in preview or beta
+• Subject to frequent changes and updates
+• Support might be limited compared to stable features
+• Documentation might be evolving</div>
+                    <p><strong>Recommendation:</strong> Evaluate carefully for your use case. For critical production work, rely on stable, well-documented features. Monitor official Cursor announcements for updates on experimental features.</p>
+                    <a href="https://docs.cursor.com/features/experimental/background-agents" class="btn" style="background: #f56565;">View Experimental Docs (If available)</a> </div>
+                
+                <h2>🗺️ Learning Path Recommendation</h2>
+                <p>Follow this suggested learning path to master Cursor efficiently:</p>
+                
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Start with the Videos Above (or Similar Tutorials)</h4>
+                        <p>Watch introductory videos or tutorials to understand core Cursor capabilities: @-file referencing, chat interaction, rule generation, and custom model presets.</p>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Learn the Basics</h4>
+                        <p>Read the <a href="https://docs.cursor.com/welcome">main documentation</a> and memorize key <a href="https://docs.cursor.com/kbd">keyboard shortcuts</a> for efficient navigation.</p>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Explore Advanced Features</h4>
+                        <p>Set up <a href="https://docs.cursor.com/features/ai-commit-messages">AI commit messages</a> and explore <a href="https://docs.cursor.com/guides/working-with-context#context-providers">Context Providers</a> for your development stack.</p>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h4>Scale to Large Projects</h4>
+                        <p>If working with large codebases, implement strategies from the <a href="https://docs.cursor.com/guides/advanced/large-codebases">large codebase guide</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h4>Learn from the Community (and Official Blog/Updates)</h4>
+                        <p>Watch community videos (e.g., from <a href="https://cursor.directory/learn">cursor.directory</a>) and follow official Cursor blogs/updates to see real-world usage patterns and discover advanced techniques.</p>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-number">6</div>
+                    <div>
+                        <h4>Stay Updated</h4>
+                        <p>Regularly check the <a href="https://www.cursor.com/changelog">changelog</a> for new features and improvements.</p>
+                    </div>
+                </div>
+
+                <hr class="styled">
+
+                <h2>🛠️ Troubleshooting Links Not Working</h2>
+                <div class="principle">
+                    <h4>Common Issues & Solutions for Navigation</h4>
+                    <p>If the main navigation links (Home, Mindset Shift, etc.) or other internal links are not working, consider the following:</p>
+                    <ul>
+                        <li><strong>Testing Environment:</strong> If you are opening HTML files directly in your browser (e.g., using <code>file:///...</code> URLs), the JavaScript <code>fetch()</code> command used in <code>js/main.js</code> to load <code>shared-header.html</code> might be blocked by browser security policies (CORS).
+                            <ul>
+                                <li><strong>Solution:</strong> Test your website using a local web server. Many simple servers are available (like Python's <code>http.server</code>, Node.js's <code>serve</code> or <code>live-server</code> extension in VS Code). This serves files over <code>http://localhost</code> and allows <code>fetch()</code> to work correctly.</li>
+                            </ul>
+                        </li>
+                        <li><strong>File Paths:</strong> Ensure that <code>js/main.js</code>, <code>style.css</code>, and <code>shared-header.html</code> are in the correct locations relative to your HTML files, as per the recommended file structure (<code>js</code> folder for <code>main.js</code>; <code>style.css</code> and <code>shared-header.html</code> in the root with other HTML pages).
+                            <ul>
+                                <li>The <code>js/main.js</code> script expects <code>shared-header.html</code> to be at the root level (<code>fetch('shared-header.html')</code>).</li>
+                                <li>HTML files link to JavaScript as <code>&lt;script src="js/main.js"&gt;&lt;/script&gt;</code>.</li>
+                            </ul>
+                        </li>
+                        <li><strong>JavaScript Errors:</strong> Open your browser's developer console (usually by pressing F12) and check for any errors. Errors in <code>js/main.js</code> could prevent the header from loading or links from being processed correctly.</li>
+                        <li><strong><code>shared-header-placeholder</code> ID:</strong> Make sure the div `<div id="shared-header-placeholder"></div>` is present in each HTML file where the header should be loaded.</li>
+                        <li><strong>External Links vs. Internal Links:</strong>
+                            <ul>
+                                <li>The <code>js/main.js</code> script is designed to make *external* links (starting with <code>http://</code> or <code>https://</code>) open in a new tab.</li>
+                                <li>*Internal* links (like <code>workflow.html</code> or <code>index.html</code> in the navigation) should navigate within the same tab.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>The sub-pages you listed (`agentic-prompts.html`, `mindset-shift.html`, `tool-setup.html`, `workflow.html`, `cursor-resources.html`, plus `index.html` and `rule-files.html`) should all be linked correctly in the `shared-header.html` file with relative paths (e.g., `href="workflow.html"`).</p>
+                </div>
+
+            </section>
+        </main> </div> <script src="js/main.js"></script>
+</body>
+</html>

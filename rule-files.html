@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Files & Templates - AI Agentic IDE Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="shared-header-placeholder"></div>
+        
+        <main class="main-content-area">
+            <section class="page-section">
+                <h2>Modern Rule Files & Templates (2025)</h2>
+                <p>Current generation .mdc rule files and modular templates based on the latest agentic IDE best practices. <strong>Note:</strong> .cursorrules files are deprecated - migrate to .mdc format for better control and flexibility.</p>
+                
+                <h3>🆕 Modern .mdc Rule File Structure</h3>
+                
+                <div class="template-card">
+                    <h4>Foundation .mdc Rule Template</h4>
+                    <div class="code-block">---
+description: Core development standards and AI behavior
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# You are an expert senior developer with deep understanding of modern software architecture
+
+## AI Behavior Guidelines
+- ALWAYS analyze the codebase context before making changes
+- Break complex tasks into smaller, manageable steps with clear reasoning
+- Reference existing patterns using @filename.ext syntax
+- Never use placeholders - provide complete, working code
+- Ask clarifying questions if requirements are ambiguous
+
+## Code Quality Standards
+- Follow established patterns in @docs/patterns/
+- Use TypeScript for type safety across the stack
+- Implement comprehensive error handling with proper logging
+- Write meaningful tests that cover edge cases
+- Optimize for performance and accessibility
+
+## Development Workflow
+- Plan implementation approach before coding
+- Use existing components and utilities when possible
+- Maintain backward compatibility unless explicitly breaking
+- Document complex business logic and architectural decisions
+- Follow semantic commit conventions for version control</div>
+                </div>
+                
+                <h3>🎯 Technology-Specific .mdc Templates</h3>
+                
+                <div class="template-card">
+                    <h4>React Development (.cursor/rules/react.mdc)</h4>
+                    <div class="code-block">---
+description: React development patterns and best practices
+globs: ["src/**/*.tsx", "src/**/*.jsx", "components/**/*.tsx"]
+alwaysApply: false
+---
+
+# You are a React expert focused on modern patterns and performance
+
+## Component Architecture
+- Use functional components with hooks exclusively
+- Implement proper TypeScript interfaces for all props
+- Apply React.memo() for components with expensive renders
+- Follow composition over inheritance patterns
+
+## State Management Strategy
+- `useState` for local component state
+- `useReducer` for complex state logic with multiple sub-values
+- Zustand for global state (avoid Context API for global state)
+- TanStack Query for server state and caching
+
+## Performance Optimization
+- Use `useCallback` for event handlers passed to children
+- Apply `useMemo` for expensive calculations
+- Implement code splitting with React.lazy() for route-level components
+- Avoid object creation in render functions
+
+## Error Handling
+- Wrap route components with error boundaries
+- Use try-catch for async operations in useEffect
+- Implement loading and error states for all async operations
+
+## Example Pattern
+```tsx
+interface UserProfileProps {
+  userId: string;
+  onUpdate?: (user: User) => void;
+}
+
+export default React.memo(function UserProfile({ userId, onUpdate }: UserProfileProps) {
+  const { data: user, isLoading, error } = useUser(userId);
+  
+  const handleUpdate = useCallback((data: UserUpdateData) => {
+    // Implementation
+    onUpdate?.(updatedUser);
+  }, [onUpdate]);
+  
+  if (isLoading) return <UserProfileSkeleton />;
+  if (error) return <ErrorMessage error={error} />;
+  
+  return <UserForm user={user} onSubmit={handleUpdate} />;
+});
+```
+
+@patterns/react-component-template.tsx</div>
+                </div>
+                
+                <div class="template-card">
+                    <h4>API Development (.cursor/rules/api.mdc)</h4>
+                    <div class="code-block">---
+description: Modern API development with TypeScript and validation
+globs: ["src/api/**/*.ts", "src/routes/**/*.ts", "src/services/**/*.ts"]
+alwaysApply: false
+---
+
+# You are a backend API expert specializing in scalable, secure systems
+
+## API Design Principles
+- Follow RESTful conventions with proper HTTP methods
+- Implement consistent response formats across all endpoints
+- Use OpenAPI/Swagger for API documentation
+- Apply proper HTTP status codes (200, 201, 400, 401, 403, 404, 500)
+
+## Request/Response Handling
+- Use Zod or similar for request validation and type inference
+- Implement middleware for authentication, rate limiting, and CORS
+- Return structured error responses with helpful messages
+- Support pagination for list endpoints with proper metadata
+
+## Security & Performance
+- Validate and sanitize all inputs at the boundary
+- Use parameterized queries to prevent SQL injection
+- Implement proper authentication (JWT with refresh tokens)
+- Add request rate limiting per endpoint
+- Use database transactions for multi-step operations
+
+## Error Handling Strategy
+- Create custom error classes with specific status codes
+- Implement global error middleware for consistent handling
+- Log errors with correlation IDs for debugging
+- Never expose internal error details to clients</div>
+                </div>
+                
+                <h3>📋 Complete Rule File Collections</h3>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>🚀 Full-Stack React + TypeScript</h4>
+                        <p>Complete .mdc rule collection for modern React applications with TypeScript, API integration, and testing</p>
+                    </div>
+                    <div class="card">
+                        <h4>🐍 Python + FastAPI</h4>
+                        <p>Professional Python development with FastAPI, async patterns, database integration, and testing</p>
+                    </div>
+                    <div class="card">
+                        <h4>☁️ AWS Serverless</h4>
+                        <p>Serverless development with AWS Lambda, API Gateway, DynamoDB, and infrastructure as code</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 DevOps & CI/CD</h4>
+                        <p>Complete DevOps workflows with Docker, Kubernetes, GitHub Actions, and monitoring</p>
+                    </div>
+                </div>
+                
+                <h3>📖 Migration from .cursorrules to .mdc</h3>
+                
+                <div class="template-card">
+                    <h4>Migration Guide & Best Practices</h4>
+                    <div class="code-block"># Migrating from .cursorrules to Modern .mdc Rules
+
+## Why Migrate?
+- Better organization with multiple rule files
+- Conditional application based on file patterns (globs)
+- Version control friendly (each rule is a separate file)
+- Agent-requested rules for intelligent context switching
+- Better IDE integration and rule management
+
+## Migration Process
+
+### Step 1: Create .cursor/rules Directory
+```bash
+mkdir -p .cursor/rules
+```
+
+### Step 2: Split .cursorrules into Focused Files
+Break your monolithic .cursorrules into specific concerns:
+
+**Foundation Rule** (.cursor/rules/foundation.mdc)
+- Core AI behavior and development standards
+- Always applied (alwaysApply: true)
+
+**Technology-Specific Rules**
+- .cursor/rules/react.mdc
+- .cursor/rules/api.mdc  
+- .cursor/rules/database.mdc
+
+**Process Rules**
+- .cursor/rules/testing.mdc
+- .cursor/rules/security.mdc
+- .cursor/rules/performance.mdc
+
+### Step 3: Use Modern .mdc Format
+```yaml
+---
+description: Clear description for agent selection
+globs: ["src/**/*.tsx", "components/**/*.jsx"]
+alwaysApply: false  # or true for foundation rules
+---
+
+# You are an expert [role] with deep knowledge of [domain]
+
+## Context-Specific Guidelines
+[Specific instructions for this rule's domain]
+
+## Reference Patterns
+@patterns/example-template.tsx
+```
+
+### Step 4: Organize by Scope
+```
+.cursor/rules/
+├── foundation.mdc          # Always applied
+├── frontend/
+│   ├── react.mdc
+│   └── styling.mdc
+├── backend/
+│   ├── api.mdc
+│   └── database.mdc
+└── process/
+    ├── testing.mdc
+    └── security.mdc
+```
+
+## Best Practices for 2025
+
+1. **Role-Based Instructions**: Start rules with "You are an expert..."
+2. **Reference External Files**: Use @filename.ext for pattern examples  
+3. **Specific Globs**: Target rules to relevant file types
+4. **Modular Design**: Keep rules focused on single concerns
+5. **Agent Descriptions**: Write clear descriptions for intelligent rule selection</div>
+                </div>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>💬 Next: Advanced Prompts</h4>
+                        <p>Learn structured prompt patterns that work with these rule files for maximum effectiveness.</p>
+                        <a href="agentic-prompts.html" class="btn">View Prompts →</a>
+                    </div>
+                    <div class="card">
+                        <h4>🔧 Setup Your Tools</h4>
+                        <p>Configure your development environment to use these modern rule files effectively.</p>
+                        <a href="tool-setup.html" class="btn">Setup Tools →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
