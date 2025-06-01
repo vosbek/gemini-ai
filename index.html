@@ -1,86 +1,201 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agentic IDE Guide for Developers</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <div id="shared-header-placeholder"></div>
+// js/main.js
+
+const contentAreaSelector = '.main-content-area'; // The element where page content will be loaded
+const sharedHeaderPlaceholderId = 'shared-header-placeholder'; // ID of the header placeholder
+
+/**
+ * Fetches HTML content from a given URL.
+ * @param {string} url - The URL to fetch the HTML content from.
+ * @returns {Promise<string|null>} The HTML text content or null if an error occurs.
+ */
+async function fetchHTML(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);A
+            return null;
+        }
+        return await response.text();
+    } catch (error) {
+        console.error(`Error fetching HTML from ${url}:`, error);
+        return null;
+    }
+}
+
+/**
+ * Loads the main content of a page into the content area.
+ * @param {string} pageUrl - The URL of the page to load (e.g., "workflow.html").
+ */
+async function loadPageContent(pageUrl) {
+    const mainContentArea = document.querySelector(contentAreaSelector);
+    if (!mainContentArea) {
+        console.error(`Main content area "${contentAreaSelector}" not found.`);
+        return;
+    }
+
+    // Show a simple loading indicator (optional)
+    mainContentArea.innerHTML = '<p style="text-align:center; padding:40px;">Loading...</p>';
+
+    const htmlContent = await fetchHTML(pageUrl);
+
+    if (htmlContent) {
+        // Create a temporary DOM element to parse the fetched HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+
+        // Find the main content area in the fetched HTML
+        const newPageMainContent = tempDiv.querySelector(contentAreaSelector);
         
-        <main class="main-content-area">
-            <section class="page-section">
-                <h2>Welcome to the AI Agentic IDE Guide</h2>
-                
-                <div class="card intro-card">
-                    <h3>🚀 What You'll Learn</h3>
-                    <p>This guide is designed for experienced developers who want to master AI-powered development tools and workflows. You'll learn how to transition from traditional coding to AI-assisted development while maintaining your high standards for code quality and architecture.</p>
-                </div>
-                
-                <h3>📖 Guide Sections</h3>
-                
-                <div class="grid">
-                    <div class="card">
-                        <h4>🧠 Mindset Shift</h4>
-                        <p>Understanding the fundamental changes in how you approach development with AI tools. Learn to think like an AI architect rather than just a coder.</p>
-                        <a href="mindset-shift.html" class="btn">Explore →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <h4>⚙️ Workflow</h4>
-                        <p>Real-world workflows for large codebases. Proven practices from developers working with production systems and modern agentic IDEs.</p>
-                        <a href="workflow.html" class="btn">Learn Workflows →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <h4>📋 Rule Files & Templates</h4>
-                        <p>Modern .mdc rule files and modular templates based on the latest agentic IDE best practices. Ready-to-use configurations for your projects.</p>
-                        <a href="rule-files.html" class="btn">Get Templates →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <h4>💬 Agentic Prompts</h4>
-                        <p>Structured prompt patterns designed for modern agentic AI systems. Templates that follow current best practices from tools like Cursor and Cline.</p>
-                        <a href="agentic-prompts.html" class="btn">View Prompts →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <h4>🔧 Tool Setup</h4>
-                        <p>Modern tool setup and configuration guide. Current generation agentic IDE setup with the latest tools and best practices.</p>
-                        <a href="tool-setup.html" class="btn">Setup Tools →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <h4>📺 Cursor Resources</h4>
-                        <p>Essential Cursor IDE features and capabilities demonstrated through practical examples. Videos and guides to maximize your productivity.</p>
-                        <a href="cursor-resources.html" class="btn">Watch Videos →</a>
-                    </div>
-                </div>
-                
-                <div class="principle">
-                    <h4>🎯 Who This Guide Is For</h4>
-                    <p><strong>Experienced Developers:</strong> You understand patterns, architecture, and best practices. This guide assumes you're comfortable with modern development workflows and want to understand how AI tools can amplify your skills.</p>
-                    <p><strong>Team Leads & Architects:</strong> You're responsible for code quality and team productivity. Learn how to implement AI-powered workflows while maintaining your standards.</p>
-                    <p><strong>Professional Developers:</strong> You work on real codebases with real constraints. These aren't toy examples - they're battle-tested approaches for production systems.</p>
-                </div>
-                
-                <h3>🚀 Quick Start</h3>
-                
-                <div class="principle">
-                    <h4>Recommended Learning Path</h4>
-                    <p><strong>1. Start with Mindset Shift</strong> - Understand the fundamental changes in how you approach development</p>
-                    <p><strong>2. Learn the Workflows</strong> - See how these concepts apply to real codebases</p>
-                    <p><strong>3. Set Up Your Tools</strong> - Configure your development environment</p>
-                    <p><strong>4. Use the Templates</strong> - Apply ready-made rule files and prompts</p>
-                    <p><strong>5. Master Advanced Techniques</strong> - Explore agentic prompts and Cursor-specific features</p>
-                </div>
-                
-                <div class="card info-card"> <h4>💡 Key Insight</h4>
-                    <p>This isn't about replacing your skills—it's about amplifying them. The developers who master AI-powered workflows will be significantly more productive and valuable. Those who ignore these tools will find themselves spending time on tasks that others complete in minutes.</p>
-                </div>
-            </section>
-        </main> </div> <script src="js/main.js"></script>
-</body>
-</html>
+        if (newPageMainContent) {
+            mainContentArea.innerHTML = newPageMainContent.innerHTML;
+        } else {
+            // Fallback: if the fetched page doesn't have a .main-content-area,
+            // try to find a .page-section or just use the body's content.
+            const newPageSection = tempDiv.querySelector('.page-section');
+            if (newPageSection) {
+                 // Wrap in main-content-area if it's missing, to keep structure
+                mainContentArea.innerHTML = ""; // Clear loading
+                mainContentArea.appendChild(newPageSection);
+
+            } else {
+                 console.warn(`Could not find "${contentAreaSelector}" or ".page-section" in fetched content from ${pageUrl}. Displaying full body.`);
+                 // As a last resort, try to get content from body, excluding script tags
+                 const bodyContent = tempDiv.querySelector('body');
+                 if (bodyContent) {
+                    // Remove script tags to prevent re-execution of main.js from fetched content
+                    bodyContent.querySelectorAll('script').forEach(script => script.remove());
+                    mainContentArea.innerHTML = bodyContent.innerHTML;
+                 } else {
+                    mainContentArea.innerHTML = '<p style="color:red; text-align:center;">Error: Content structure not found in fetched page.</p>';
+                 }
+            }
+        }
+        // Re-apply functions that need to run on new content, if any (e.g., for newly added external links)
+        secureExternalLinks(); // Secure any new external links in the loaded content
+        setActiveNavLink(pageUrl); // Update active nav link
+    } else {
+        mainContentArea.innerHTML = `<p style="color:red; text-align:center;">Error: Could not load content for ${pageUrl}.</p>`;
+    }
+}
+
+/**
+ * Sets the active class on the navigation item corresponding to the current page.
+ * @param {string} pageUrl - The URL of the currently displayed page.
+ */
+function setActiveNavLink(pageUrl) {
+    const currentPageFilename = pageUrl.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll(`#${sharedHeaderPlaceholderId} .main-nav .nav-item`);
+
+    navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (!linkHref) return;
+        const linkPageFilename = linkHref.split('/').pop();
+
+        if (linkPageFilename === currentPageFilename) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+/**
+ * Adds target="_blank" and rel="noopener noreferrer" to all external links
+ * on the page. This should be called after new content is loaded.
+ */
+function secureExternalLinks() {
+    // Query for links within the main content area and the header
+    const links = document.querySelectorAll(`${contentAreaSelector} a, #${sharedHeaderPlaceholderId} a`);
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        }
+    });
+}
+
+/**
+ * Handles navigation link clicks for SPA-like behavior.
+ * @param {Event} event - The click event.
+ */
+function handleNavLinkClick(event) {
+    const link = event.target.closest('a.nav-item'); // Ensure we are targeting a nav link
+    if (link && link.href) {
+        // Check if it's an internal link to an HTML page within the site
+        const targetUrl = new URL(link.href, window.location.origin); // Resolve relative URLs
+        const currentHost = window.location.hostname;
+
+        if (targetUrl.hostname === currentHost && targetUrl.pathname.endsWith('.html')) {
+            event.preventDefault(); // Prevent full page reload
+            const pagePath = targetUrl.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+            
+            if (pagePath !== (window.location.pathname.split('/').pop() || 'index.html') ) { // Only load if different page
+                loadPageContent(link.getAttribute('href')); // Use original href for fetching
+                window.history.pushState({ path: link.getAttribute('href') }, '', link.href); // Update URL
+            }
+        }
+        // External links or non-HTML internal links will behave normally
+    }
+}
+
+/**
+ * Handles browser back/forward button clicks.
+ * @param {PopStateEvent} event - The popstate event.
+ */
+function handlePopState(event) {
+    if (event.state && event.state.path) {
+        loadPageContent(event.state.path);
+    } else {
+        // Handle initial page load or cases where state is null (e.g. hash changes)
+        // For simplicity, load content based on current pathname
+        const initialPath = window.location.pathname.split('/').pop() || 'index.html';
+        loadPageContent(initialPath);
+    }
+}
+
+/**
+ * Initializes the shared header and sets up initial page content and event listeners.
+ */
+async function initializeSite() {
+    // 1. Ensure header placeholder exists
+    let headerPlaceholder = document.getElementById(sharedHeaderPlaceholderId);
+    if (!headerPlaceholder) {
+        headerPlaceholder = document.createElement('div');
+        headerPlaceholder.id = sharedHeaderPlaceholderId;
+        const container = document.querySelector('.container');
+        if (container) {
+            container.prepend(headerPlaceholder);
+        } else {
+            document.body.prepend(headerPlaceholder);
+        }
+    }
+
+    // 2. Load shared header
+    const headerHTML = await fetchHTML('shared-header.html');
+    if (headerHTML) {
+        headerPlaceholder.innerHTML = headerHTML;
+        // Add click listener to the navigation area AFTER header is loaded
+        const navElement = headerPlaceholder.querySelector('.main-nav');
+        if (navElement) {
+            navElement.addEventListener('click', handleNavLinkClick);
+        }
+    } else {
+        headerPlaceholder.innerHTML = `<p style="color: red; text-align: center; padding: 20px; background: #fff2f2; border: 1px solid red;">Error: Could not load shared navigation. Please check console and ensure you are using a local web server if testing locally.</p>`;
+        // No navigation, so SPA features might be limited.
+    }
+
+    // 3. Load initial page content based on the current URL
+    // This handles direct navigation to a subpage or page refresh
+    const initialPath = window.location.pathname.split('/').pop() || 'index.html';
+    await loadPageContent(initialPath); // Ensure this also calls setActiveNavLink
+
+    // 4. Add event listener for browser back/forward navigation
+    window.addEventListener('popstate', handlePopState);
+
+    // 5. Secure external links on initial load (header + initial content)
+    secureExternalLinks();
+}
+
+// Run initialization when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initializeSite);
