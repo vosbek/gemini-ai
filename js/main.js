@@ -1,128 +1,207 @@
 // js/main.js
 
+const contentAreaSelector = '.main-content-area'; // The element where page content will be loaded
+const sharedHeaderPlaceholderId = 'shared-header-placeholder'; // ID of the header placeholder
+
 /**
- * Fetches HTML content from a given URL and inserts it into a specified element.
+ * Fetches HTML content from a given URL.
  * @param {string} url - The URL to fetch the HTML content from.
- * @param {string} elementSelector - The CSS selector of the element to insert the content into.
+ * @returns {Promise<string|null>} The HTML text content or null if an error occurs.
  */
-async function loadHTML(url, elementSelector) {
+async function fetchHTML(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            // If fetching shared-header.html fails, it's a critical error for navigation.
-            console.error(`CRITICAL: Failed to fetch ${url}: ${response.status} ${response.statusText}`);
-            const element = document.querySelector(elementSelector);
-            if (element) {
-                element.innerHTML = `<p style="color: red; text-align: center; padding: 20px; background: #fff2f2; border: 1px solid red;">Error: Could not load shared navigation. Please check console and ensure you are using a local web server.</p>`;
-            }
-            return false; // Indicate failure
+            // Corrected line: Removed the extraneous 'A'
+            console.error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
+            return null;
         }
-        const text = await response.text();
-        const element = document.querySelector(elementSelector);
-        if (element) {
-            element.innerHTML = text;
-            return true; // Indicate success
-        } else {
-            console.warn(`Element with selector "${elementSelector}" not found for content from ${url}.`);
-            return false; // Indicate failure
-        }
+        return await response.text();
     } catch (error) {
-        console.error('Error loading HTML:', error);
-        const element = document.querySelector(elementSelector);
-        if (element) {
-            element.innerHTML = `<p style="color: red; text-align: center; padding: 20px; background: #fff2f2; border: 1px solid red;">Error: Could not load shared navigation due to a network or script error. Check console.</p>`;
+        console.error(`Error fetching HTML from ${url}:`, error);
+        return null;
+    }
+}
+
+/**
+ * Loads the main content of a page into the content area.
+ * @param {string} pageUrl - The URL of the page to load (e.g., "workflow.html").
+ */
+async function loadPageContent(pageUrl) {
+    const mainContentArea = document.querySelector(contentAreaSelector);
+    if (!mainContentArea) {
+        console.error(`Main content area "${contentAreaSelector}" not found.`);
+        return;
+    }
+
+    // Show a simple loading indicator (optional)
+    mainContentArea.innerHTML = '<p style="text-align:center; padding:40px;">Loading...</p>';
+
+    const htmlContent = await fetchHTML(pageUrl);
+
+    if (htmlContent) {
+        // Create a temporary DOM element to parse the fetched HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+
+        // Find the main content area in the fetched HTML
+        const newPageMainContent = tempDiv.querySelector(contentAreaSelector);
+        
+        if (newPageMainContent) {
+            mainContentArea.innerHTML = newPageMainContent.innerHTML;
+        } else {
+            // Fallback: if the fetched page doesn't have a .main-content-area,
+            // try to find a .page-section. This might indicate the fetched HTML
+            // is not structured as expected (e.g., it's an error page from the server).
+            const newPageSection = tempDiv.querySelector('.page-section');
+            if (newPageSection) {
+                console.warn(`Fetched page ${pageUrl} did not contain "${contentAreaSelector}". Using ".page-section" instead.`);
+                mainContentArea.innerHTML = ""; // Clear loading
+                mainContentArea.appendChild(newPageSection); // Append the section directly
+            } else {
+                 console.error(`Could not find "${contentAreaSelector}" or ".page-section" in fetched content from ${pageUrl}.`);
+                 mainContentArea.innerHTML = '<p style="color:red; text-align:center; padding:20px; background:#fff2f2; border:1px solid red;">Error: Content structure not found in fetched page. Check console for fetch errors.</p>';
+            }
         }
-        return false; // Indicate failure
+        // Re-apply functions that need to run on new content
+        secureExternalLinks(); 
+        setActiveNavLink(pageUrl); 
+    } else {
+        mainContentArea.innerHTML = `<p style="color:red; text-align:center; padding:20px; background:#fff2f2; border:1px solid red;">Error: Could not load content for ${pageUrl}. Check console for fetch errors.</p>`;
     }
 }
 
 /**
  * Sets the active class on the navigation item corresponding to the current page.
+ * @param {string} pageUrl - The URL of the currently displayed page (e.g., "index.html", "workflow.html").
  */
-function setActiveNavLink() {
-    // Get the current page's filename (e.g., "index.html", "workflow.html")
-    // window.location.pathname can be like "/folder/page.html" or just "/page.html"
-    const pathParts = window.location.pathname.split('/');
-    const currentPage = pathParts.pop() || 'index.html'; // Default to index.html if path ends with '/'
-
-    const navLinks = document.querySelectorAll('.main-nav .nav-item');
-
-    if (navLinks.length === 0) {
-        // This might happen if shared-header.html hasn't loaded yet or has no nav items.
-        // console.warn("setActiveNavLink: No navigation links found. Header might not be loaded yet.");
-        return;
-    }
+function setActiveNavLink(pageUrl) {
+    const currentPageFilename = pageUrl.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll(`#${sharedHeaderPlaceholderId} .main-nav .nav-item`);
 
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
         if (!linkHref) return;
+        const linkPageFilename = linkHref.split('/').pop();
 
-        const linkPage = linkHref.split('/').pop();
-
-        // Remove active class from all first
-        link.classList.remove('active');
-
-        if (linkPage === currentPage) {
+        if (linkPageFilename === currentPageFilename) {
             link.classList.add('active');
+        } else {
+            link.classList.remove('active');
         }
     });
 }
 
 /**
- * Adds target="_blank" and rel="noopener noreferrer" to all external links.
- * External links are those starting with "http://" or "https://".
+ * Adds target="_blank" and rel="noopener noreferrer" to all external links
+ * on the page. This should be called after new content is loaded.
  */
 function secureExternalLinks() {
-    const links = document.querySelectorAll('a');
+    // Query for links within the main content area and the header
+    const links = document.querySelectorAll(`${contentAreaSelector} a, #${sharedHeaderPlaceholderId} a`);
     links.forEach(link => {
         const href = link.getAttribute('href');
-        if (href) {
-            // Check if the link is external
-            if (href.startsWith('http://') || href.startsWith('https://')) {
-                // Ensure it's not a link to the same domain if you want to be more specific,
-                // but for this general guide, any absolute http/https is treated as external.
-                link.setAttribute('target', '_blank');
-                link.setAttribute('rel', 'noopener noreferrer');
+        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+            // Check if it's not a link to the same host, to be more precise for external links
+            try {
+                const targetUrl = new URL(href);
+                if (targetUrl.hostname !== window.location.hostname) {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            } catch (e) {
+                // If URL is invalid, do nothing or log error
+                console.warn('Could not parse URL for securing external link:', href, e);
             }
         }
     });
 }
 
+/**
+ * Handles navigation link clicks for SPA-like behavior.
+ * @param {Event} event - The click event.
+ */
+function handleNavLinkClick(event) {
+    const link = event.target.closest('a.nav-item'); 
+    if (link && link.href) {
+        const targetUrl = new URL(link.href, window.location.origin); 
+        const currentUrl = new URL(window.location.href);
 
-// Run functions when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Create a placeholder for the shared header if it doesn't exist in the HTML
-    // This ensures the script can always find a place to inject the header.
-    let headerPlaceholder = document.getElementById('shared-header-placeholder');
+        // Check if it's an internal link to an HTML page within the site
+        if (targetUrl.hostname === currentUrl.hostname && 
+            targetUrl.pathname.endsWith('.html') &&
+            targetUrl.href !== currentUrl.href) { // Only navigate if different page
+            
+            event.preventDefault(); 
+            
+            // Get the simple filename (e.g., "workflow.html") for loadPageContent and pushState
+            const pageFilename = targetUrl.pathname.substring(targetUrl.pathname.lastIndexOf('/') + 1);
+            
+            loadPageContent(pageFilename); 
+            window.history.pushState({ path: pageFilename }, '', link.href); 
+        }
+        // External links or non-HTML internal links will behave normally
+    }
+}
+
+/**
+ * Handles browser back/forward button clicks.
+ * @param {PopStateEvent} event - The popstate event.
+ */
+function handlePopState(event) {
+    let path;
+    if (event.state && event.state.path) {
+        path = event.state.path;
+    } else {
+        // Fallback for initial load or states without a path (e.g. hash changes, or direct entry)
+        path = window.location.pathname.split('/').pop() || 'index.html';
+    }
+    loadPageContent(path);
+}
+
+/**
+ * Initializes the shared header and sets up initial page content and event listeners.
+ */
+async function initializeSite() {
+    // 1. Ensure header placeholder exists
+    let headerPlaceholder = document.getElementById(sharedHeaderPlaceholderId);
     if (!headerPlaceholder) {
         headerPlaceholder = document.createElement('div');
-        headerPlaceholder.id = 'shared-header-placeholder';
-        
-        // Try to prepend to '.container', otherwise prepend to 'body'
-        const container = document.querySelector('.container'); 
+        headerPlaceholder.id = sharedHeaderPlaceholderId;
+        const container = document.querySelector('.container');
         if (container) {
-            // Insert it as the first child of the container
             container.prepend(headerPlaceholder);
         } else {
-            // Fallback: insert as the first child of the body
             document.body.prepend(headerPlaceholder);
-            console.warn('.container element not found for header placeholder. Prepending to body. This might affect layout.');
+            console.warn('Container not found, prepending header placeholder to body.');
         }
     }
-    
-    // 2. Load shared header HTML into the placeholder
-    // The path 'shared-header.html' assumes it's in the same directory as the current HTML page (root).
-    const headerLoadedSuccessfully = await loadHTML('shared-header.html', '#shared-header-placeholder');
-    
-    // 3. Only proceed with nav link functions if the header was loaded
-    if (headerLoadedSuccessfully) {
-        // Set active nav link based on the current page
-        setActiveNavLink();
 
-        // Secure external links (make them open in new tabs)
-        // This should be called after the header (which contains nav links) is loaded.
-        secureExternalLinks(); 
+    // 2. Load shared header
+    const headerHTML = await fetchHTML('shared-header.html');
+    if (headerHTML) {
+        headerPlaceholder.innerHTML = headerHTML;
+        const navElement = headerPlaceholder.querySelector('.main-nav');
+        if (navElement) {
+            navElement.addEventListener('click', handleNavLinkClick);
+        } else {
+            console.warn('Main navigation element (.main-nav) not found in shared-header.html.');
+        }
     } else {
-        console.error("Shared header failed to load. Navigation and external link processing skipped.");
+        headerPlaceholder.innerHTML = `<p style="color: red; text-align: center; padding: 20px; background: #fff2f2; border: 1px solid red;">Error: Could not load shared navigation. Please check console and ensure you are using a local web server if testing locally, or that 'shared-header.html' is accessible.</p>`;
     }
-});
+
+    // 3. Load initial page content based on the current URL path
+    const initialPageFilename = window.location.pathname.split('/').pop() || 'index.html';
+    await loadPageContent(initialPageFilename); 
+
+    // 4. Add event listener for browser back/forward navigation
+    window.addEventListener('popstate', handlePopState);
+
+    // 5. Secure external links on initial load (header + initial content)
+    // This needs to be called after both header and initial content are potentially loaded.
+    secureExternalLinks();
+}
+
+// Run initialization when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initializeSite);
